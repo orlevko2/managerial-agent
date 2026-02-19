@@ -1,10 +1,6 @@
-import os
-from anthropic import Anthropic
-from dotenv import load_dotenv
+from openai import OpenAI
 
-load_dotenv()
-
-client = Anthropic()
+client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
 
 SYSTEM_PROMPT = """You are a managerial assistant agent. You help managers with tasks such as:
 - Drafting and summarizing communications
@@ -30,14 +26,12 @@ def run_agent():
 
         conversation.append({"role": "user", "content": user_input})
 
-        response = client.messages.create(
-            model="claude-opus-4-6",
-            max_tokens=8096,
-            system=SYSTEM_PROMPT,
-            messages=conversation,
+        response = client.chat.completions.create(
+            model="llama3.2",
+            messages=[{"role": "system", "content": SYSTEM_PROMPT}] + conversation,
         )
 
-        assistant_message = response.content[0].text
+        assistant_message = response.choices[0].message.content
         conversation.append({"role": "assistant", "content": assistant_message})
 
         print(f"\nAgent: {assistant_message}\n")
