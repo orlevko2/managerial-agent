@@ -9,7 +9,7 @@ A CLI-based conversational AI agent that assists managers with communications, a
 ## Setup
 
 ```bash
-pip install -r managerial-agent/requirements.txt
+pip install -r requirements.txt
 ollama pull llama3.2   # one-time model download
 ```
 
@@ -18,10 +18,10 @@ Requires [Ollama](https://ollama.com) running locally (`ollama serve`).
 ## Running
 
 ```bash
-python managerial-agent/src/agent.py
+python src/agent.py
 ```
 
-Type `exit` or `quit` to stop. The agent runs from `managerial-agent/src/`, so relative file paths in tool calls resolve there.
+Type `exit` or `quit` to stop. The agent runs from `src/`, so relative file paths in tool calls resolve there.
 
 ## Architecture
 
